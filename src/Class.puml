@@ -1,0 +1,88 @@
+@startuml
+package Model{
+abstract carta{
+-Nombre: string
+-Tipo: String
+-Texto: String
++carta(nombre: String, tipo: String, texto: String)
++{abstract}BuscarCarta(nombre: String)
++get's() & sets()
+
+}
+class lands extends carta{
+-Color: String[]
++lands(nombre: String, tipo: String, texto: String, Color: String)
++get's() & sets()
+}
+
+class Non-lands extends carta{
+-Power: int
+-toughness: int
+-CMC: int
+-ManaCost: String[]
++lands(nombre: String, tipo: String, texto: String, power: int, toughness: int, CMC: int ManaCost String[])
++get's() & sets()
+}
+
+class listaCartas{
+-maindeck: Cartas[]
+-sidedeck: carta[]
+-cantidadMaxima: int
+-cantidadminima: int
++ListaCartas(CantidadMaximaInt)
++AgregarCarta(nombre: String, tipo: String, texto: String)
++modificarSideDeck():void
++modificarMainDeck():void
++AgregarCarta(Carta: carta,Cantidad: int):boolean
++EliminarCarta(Carta: carta,Cantidad: int):boolean
++VerificarCantidad():void
++get's() & sets()
+}
+
+class listaMazos{
+-Nombre: String
+-Mazos ListaCartas[]
+-cantidadMaxima: int
+-cantidadminima: int
++listaMazos(CantidadMaximaInt, nombre: String))
++AgregarMazo(cantidadDeCartas:int):boolean
++EliminarMazo(posicionDeMazo: int)):boolean
+
+}
+
+}
+package utils{
+CLass instalador{
+    - sistemaCartas : IsistemaDeckList
+	+ Instalador()
+	+ instalarSistema(): IsistemaDeckList
+}
+
+}
+package services{
+interface IsistemaDeckList{
+IniciarSesion():
+registrarse():
+Salir():
+}
+
+
+Class sistemaDeckList implements IsistemaDeckList{
+-Mazos: ListaMazos
+-NOMBRE_ARCHIVO_TEXTO_TXT: String
+-NOMBRE_ARCHIVO_TEXTO_CSV: String
+
++SistemaDecklist()
+-ConstruirMazo()
+-verMisMazos()
+-BuscarCarta()
+-cerrarSesion()
+}
+
+listaMazos "1" <-- "1" sistemaDeckList: gestiona
+instalador "1"---right--*"1" IsistemaDeckList:  instala
+instalador "1"..* "1" sistemaDeckList: instancia
+listaCartas "1"--o "60..*" carta
+listaMazos "1" --o "1..*" listaCartas
+}
+@enduml
