@@ -1,27 +1,38 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+Entity Carta{
+nombre
+coste
+tipo
+power
+toughness
+CMC
+Color
+--
+agregarCarta()
+eliminarCarta()
 }
+Entity mazos{
+nombre de mazo
+cantidad de cartas
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
 }
+Entity listademazos{
+cantidad de mazos
+--
+verMazos()
+agregarNuevoMazo()
+eliminarMazo()
+}
+Entity sistemadeCartas{
+Modificar deck
+modificar sideboard
+construir mazo
+ver mazos
+}
+Carta --> mazos
+mazos --> listademazos
+listademazos --> sistemadeCartas
 
 @enduml
