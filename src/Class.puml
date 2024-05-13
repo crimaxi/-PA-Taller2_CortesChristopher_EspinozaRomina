@@ -9,13 +9,13 @@ abstract carta{
 +get's() & sets()
 
 }
-class lands extends carta{
+class land extends carta{
 -Color: String[]
 +lands(nombre: String, tipo: String, texto: String, Color: String)
 +get's() & sets()
 }
 
-class Non-lands extends carta{
+class Non-land extends carta{
 -Power: int
 -toughness: int
 -CMC: int
@@ -52,7 +52,7 @@ class listaMazos{
 
 }
 package utils{
-CLass instalador{
+class instalador{
     - sistemaCartas : IsistemaDeckList
 	+ Instalador()
 	+ instalarSistema(): IsistemaDeckList

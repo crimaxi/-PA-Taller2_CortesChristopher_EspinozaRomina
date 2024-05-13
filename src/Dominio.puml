@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
-
+left to right direction
 Entity Carta{
 nombre
 coste
@@ -13,7 +13,7 @@ Color
 agregarCarta()
 eliminarCarta()
 }
-Entity mazos{
+Entity mazo{
 nombre de mazo
 cantidad de cartas
 
@@ -21,7 +21,7 @@ cantidad de cartas
 Entity listademazos{
 cantidad de mazos
 --
-verMazos()
+verMazo()
 agregarNuevoMazo()
 eliminarMazo()
 }
@@ -31,8 +31,8 @@ modificar sideboard
 construir mazo
 ver mazos
 }
-Carta --> mazos
-mazos --> listademazos
-listademazos --> sistemadeCartas
+Carta "60..*"--> "1" mazo
+mazo "1.." --> "1" listademazos
+listademazos "1" --> "1" sistemadeCartas
 
 @enduml
