@@ -2,35 +2,36 @@
 package Model{
 abstract carta{
 -Nombre: string
--Tipo: String
 -Texto: String
-+carta(nombre: String, tipo: String, texto: String)
++carta(nombre: String, texto: String)
 +{abstract}BuscarCarta(nombre: String)
++{abstract}BuscarCarta((nombre: String, tipo: String, texto: String)
 +get's() & sets()
 
 }
 class land extends carta{
--Color: String[]
-+lands(nombre: String, tipo: String, texto: String, Color: String)
+-Color: String
++lands(nombre: String,, texto: String, Color: String)
 +get's() & sets()
 }
 
-class Non-land extends carta{
+class Nonland extends carta{
 -Power: int
 -toughness: int
 -CMC: int
 -ManaCost: String[]
-+lands(nombre: String, tipo: String, texto: String, power: int, toughness: int, CMC: int ManaCost String[])
+-tipo: String
++lands(nombre: String, tipo: String, texto: String, power: int, toughness: int, CMC: int ManaCost String[],tipo String)
 +get's() & sets()
 }
 
-class listaCartas{
--maindeck: Cartas[]
+class Mazo{
+-maindeck: carta[]
 -sidedeck: carta[]
 -cantidadMaxima: int
--cantidadminima: int
+-cantidadActual: int
 +ListaCartas(CantidadMaximaInt)
-+AgregarCarta(nombre: String, tipo: String, texto: String)
++AgregarCarta(nombre: String):boolean
 +modificarSideDeck():void
 +modificarMainDeck():void
 +AgregarCarta(Carta: carta,Cantidad: int):boolean
@@ -41,9 +42,9 @@ class listaCartas{
 
 class listaMazos{
 -Nombre: String
--Mazos ListaCartas[]
+-mazos Mazos[]
 -cantidadMaxima: int
--cantidadminima: int
+-cantidadActual: int
 +listaMazos(CantidadMaximaInt, nombre: String))
 +AgregarMazo(cantidadDeCartas:int):boolean
 +EliminarMazo(posicionDeMazo: int)):boolean
@@ -68,9 +69,9 @@ Salir():
 
 
 Class sistemaDeckList implements IsistemaDeckList{
--Mazos: ListaMazos
+-Mazos: Mazo
 -NOMBRE_ARCHIVO_TEXTO_TXT: String
--NOMBRE_ARCHIVO_TEXTO_CSV: String
+-NOMBRE_ARCHIVO_TEXTO_TXT2: String
 
 +SistemaDecklist()
 -ConstruirMazo()
@@ -82,7 +83,7 @@ Class sistemaDeckList implements IsistemaDeckList{
 listaMazos "1" <-- "1" sistemaDeckList: gestiona
 instalador "1"---right--*"1" IsistemaDeckList:  instala
 instalador "1"..* "1" sistemaDeckList: instancia
-listaCartas "1"--o "60..*" carta
-listaMazos "1" --o "1..*" listaCartas
+Mazo "1"--o "60..*" carta
+listaMazos "1" --o "1..*" Mazo
 }
 @enduml
