@@ -3,9 +3,9 @@ package Model;
 public class NonLand extends Carta {
     private String tipo;
     private int power,toughness,CMC;
-    private String [] manaCost;
+    private String  manaCost;
 
-    public NonLand(String texto, String nombre, String tipo, String[] manaCost, int CMC, int toughness, int power) {
+    public NonLand(String texto, String nombre, String tipo, String manaCost, int CMC, int toughness, int power) {
         super(texto, nombre);
         this.tipo = tipo;
         this.manaCost = manaCost;

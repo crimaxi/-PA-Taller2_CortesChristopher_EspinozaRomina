@@ -9,6 +9,22 @@ abstract carta{
 +get's() & sets()
 
 }
+class usuario{
+-nombre: String
+-Contraseña: String
++usuario((nombre: String, contraseña: String)
++get's () & set's()
+}
+Class ListaUsuarios{
+-Usuario usuario[]
+-cantidadMaxima: int
+-cantidadActual: int
++ListaUsuarios(CantidadMaximaInt)
++buscarUsuario(nombre: String)
++crearUsuario((nombre: String,contraseña:String)
++get's () & set's()
+}
+
 class land extends carta{
 -Color: String
 +lands(nombre: String,, texto: String, Color: String)
@@ -81,9 +97,11 @@ Class sistemaDeckList implements IsistemaDeckList{
 }
 
 listaMazos "1" <-- "1" sistemaDeckList: gestiona
-instalador "1"---right--*"1" IsistemaDeckList:  instala
+instalador "1"---left--*"1" IsistemaDeckList:  instala
 instalador "1"..* "1" sistemaDeckList: instancia
 Mazo "1"--o "60..*" carta
-listaMazos "1" --o "1..*" Mazo
+listaMazos "1" -right-o "1..*" Mazo
+usuario "1..*" --> "1" ListaUsuarios
+ListaUsuarios <-- sistemaDeckList:gestiona
 }
 @enduml
