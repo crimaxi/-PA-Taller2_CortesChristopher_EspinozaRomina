@@ -3,14 +3,14 @@ package Model;
 public class Mazo {
 private Carta[] mainDeck, sideDeck;
 private int cantidadMaxima, cantidadActual;
-
     public Mazo(int cantidadMaxima) {
         this.cantidadActual=0;
         this.cantidadMaxima=cantidadMaxima;
         this.mainDeck = new Carta[cantidadMaxima];
         this.sideDeck = new Carta[15];
     }
-    public boolean agregarCarta (String nombre){
+    public boolean agregarCarta (Carta carta){
+        mainDeck[cantidadActual]=carta;
         return false;
     }
     public boolean modificarDeck(String tipo){

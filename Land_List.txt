@@ -1,0 +1,31 @@
+Card name,Type,Color
+Castle Ardenvale,Land,W
+Cave of the Frost Dragon,Land,W
+Desert of the True,Land - Desert,W
+Drifting Meadow,Land,W
+Flagstones of Trokair,Legendary Land,W
+Forbidding Watchtower,Land,W
+Idyllic Grange,Land - Plains,W
+Kabira Crossroads,Land,W
+Kjeldoran Outpost,Land,W
+Kor Haven,Legendary Land,W
+Memorial to Glory,Land,W
+New Benalia,Land,W
+Nomad Stadium,Land,W
+Rustic Clachan,Land,W
+Sandstone Bridge,Land,W
+Secluded Steppe,Land,W
+Sejiri Steppe,Land,W
+Shefet Dunes,Land - Desert,W
+Snow-Covered Plains,Basic Snow Land - Plains,W
+Vivid Meadow,Land,W
+Blighted Cataract,Land,U
+Castle Vantress,Land,U
+Cephalid Coliseum,Land,U
+Desert of the Mindful,Land - Desert,U
+Faerie Conclave,Land,U
+Halimar Depths,Land,U
+Hall of Storm Giants,Land,U
+Ipnu Rivulet,Land - Desert,U
+Lonely Sandbar,Land,U
+Zoetic Cavern,Land,Colorless

@@ -1,17 +1,16 @@
 package Model;
 
 public class ListaMazos {
-private String Nombre;
 private Mazo[] Mazos;
 private int cantidadActual, cantidadMaxima;
 
-    public ListaMazos(String nombre, int cantidadMaxima, Mazo[] mazos, int cantidadActual) {
-        Nombre = nombre;
+    public ListaMazos(int cantidadMaxima) {
         this.cantidadMaxima = cantidadMaxima;
-        Mazos = mazos;
-        this.cantidadActual = cantidadActual;
+        this.cantidadActual = 0;
+        this.Mazos=new Mazo[cantidadMaxima];
     }
     public boolean agregarMazos(int cantidadDeCartas){
+
         return false;
     }
     public boolean eliminarMazos(int posicionDelMazo){

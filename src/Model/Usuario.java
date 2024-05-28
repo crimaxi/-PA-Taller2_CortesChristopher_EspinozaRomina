@@ -1,22 +1,17 @@
 package Model;
 
 public class Usuario {
-    private String nombre, contraseña;
+    private String nombre, contrasenia;
 
-    public Usuario(String nombre, String contraseña) {
+    public Usuario(String nombre, String contrasenia) {
         this.nombre = nombre;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
     }
     public String getNombre() {
         return nombre;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getContrasenia() {
+        return contrasenia;
     }
-    public String getContraseña() {
-        return contraseña;
-    }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
+
 }

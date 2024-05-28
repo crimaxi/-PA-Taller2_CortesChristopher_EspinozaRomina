@@ -1,7 +1,10 @@
 package Services;
 
 public interface IsistemaDeckList {
-    String iniciarSesison();
-    String registrarse();
-    String Salir();
+    boolean inicializar();
+    boolean iniciarSesion();
+    boolean registrarse();
+    void sistemaCreacion();
+    void Salir();
+
 }

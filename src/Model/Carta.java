@@ -34,4 +34,8 @@ private String nombre,tipo, texto;
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public void agregarCarta(Carta carta) {
+
+    }
 }
