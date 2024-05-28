@@ -9,7 +9,7 @@ private int cantidadActual, cantidadMaxima;
         this.cantidadActual = 0;
         this.Mazos=new Mazo[cantidadMaxima];
     }
-    public boolean agregarMazos(int cantidadDeCartas){
+    public boolean agregarMazos(Mazo mazo){
 
         return false;
     }

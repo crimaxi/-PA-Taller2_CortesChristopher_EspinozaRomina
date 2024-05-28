@@ -13,10 +13,12 @@ private int cantidadMaxima, cantidadActual;
         mainDeck[cantidadActual]=carta;
         return false;
     }
+
     public boolean modificarDeck(String tipo){
         return false;
     }
-    public boolean agregarCarta(Carta carta,int cantidad){
+    public boolean agregarCarta(String nombre,int cantidad){
+
         return false;
     }
     public boolean EliminarCarta(Carta carta,int cantidad){

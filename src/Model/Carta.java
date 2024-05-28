@@ -1,11 +1,12 @@
 package Model;
 
 public abstract class Carta {
-private String nombre,tipo, texto;
+private String nombre, texto;
+private int cantidad;
 
     public Carta(String texto, String nombre) {
         this.texto = texto;
-
+        this.cantidad=1;
         this.nombre = nombre;
     }
     public abstract boolean buscarCarta  (String nombre);
@@ -19,14 +20,6 @@ private String nombre,tipo, texto;
         this.texto = texto;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -35,7 +28,7 @@ private String nombre,tipo, texto;
         this.nombre = nombre;
     }
 
-    public void agregarCarta(Carta carta) {
-
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

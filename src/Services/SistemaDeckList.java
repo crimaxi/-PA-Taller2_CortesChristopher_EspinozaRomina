@@ -17,6 +17,7 @@ public class SistemaDeckList implements IsistemaDeckList {
     private ListaCartas listaNoTierras;
 
     private void construirMazo() {
+
     }
     private void construirMazo(Mazo mazo) {
     }
@@ -89,18 +90,43 @@ public class SistemaDeckList implements IsistemaDeckList {
         return true;
     }
     private boolean LecturaDeMazos(String nombreDeUsuario) {
-        int cont=1;
+        int cont = 1;
         this.NOMBRE_ARCHIVO_TEXTO_MAZO = "mazo" + cont + nombreDeUsuario + ".txt";
         File Archivo = new File(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
+        boolean sidedeck = false;
+        String[][] MainDeck = new String[2][100];
+        String[][] sideDeck = new String[2][15];
+        int cont2=0;
+        int cont3=0;
         while (Archivo.exists()) {
+
             In archivoDeck = new In(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
-            String[] linea = archivoDeck.readLine().split(";");
-            StdOut.println(linea[0]+","+linea[1]+","+linea[2]+","+linea[3]+","+linea[4]+","+linea[5]+","+linea[6] );
+            while (!archivoDeck.isEmpty()) {
+
+                String[] linea = archivoDeck.readLine().split(";");
+
+                if (linea[0].equals("SIDEBOARD")) {
+                    sidedeck = true;
+                    cont2 = 0;
+                } else {
+                    MainDeck[0][cont2] = linea[0];
+                    MainDeck[1][cont2] = linea[1];
+                    cont2++;
+
+                }
+                if (sidedeck) {
+                    sideDeck[0][cont3] = linea[0];
+                    sideDeck[0][cont3] = linea[1];
+                    cont3++;
+                }
+               Mazo mazo = new Mazo(cont2);
+
+            }
             cont++;
             this.NOMBRE_ARCHIVO_TEXTO_MAZO = "mazo" + cont + nombreDeUsuario + ".txt";
             Archivo = new File(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
         }
-            return true;
+        return true;
 
     }
 
@@ -171,13 +197,16 @@ public class SistemaDeckList implements IsistemaDeckList {
                 case "1":
                     construirMazo();
                 case "2":
-                    construirMazo();
+                    ModificarMazo();
                 case "3":
                     menuActivo = false;
                     break;
                 default:
             }
         }
+    }
+
+    private void ModificarMazo() {
     }
 
     @Override

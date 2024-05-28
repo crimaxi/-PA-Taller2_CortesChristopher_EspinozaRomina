@@ -1,1 +1,36 @@
-Card1;Description1;{3}{W};Creature;2;3;4
+2;Boseiju,Who Endures
+1;Breeding Pool
+4;Delighted Halfling
+1;Elesh Norn, Mother of Machines
+3;Fable of the Mirror-Breaker // Reflection of Kiki-Jiki
+3;Flooded Strand
+1;Forest
+1;Hallowed Fountain
+1;Island
+4;Leyline Binding
+1;Lightning Bolt
+4;Misty Rainforest
+4;Omnath, Locus of Creation
+1;Plains
+3;Prismatic Ending
+1;Raugrin Triome
+1;Sacred Foundry
+4;Solitude
+1;Steam Vents
+1;Stomping Ground
+4;Teferi, Time Raveler
+1;Temple Garden
+4;The One Ring
+4;Windswept Heath
+4;Wrenn and Six
+1;Zagoth Triome
+SIDEBOARD:
+2;Boseiju, Who Endures
+2;Chalice of the Void
+2;Dovin's Veto
+1;Emrakul, the Promised End
+3;Endurance
+2;Fury
+1;Spell Pierce
+1;Tear Asunder
+1;Veil of Summer
