@@ -1,13 +1,13 @@
 package Model;
 
 public class NonLand extends Carta {
-    private String tipo;
+    private String texto;
     private int power,toughness,CMC;
     private String  manaCost;
 
-    public NonLand(String texto, String nombre, String tipo, String manaCost, int CMC, int toughness, int power) {
-        super(texto, nombre);
-        this.tipo = tipo;
+    public NonLand(String tipo, String nombre, String texto, String manaCost, int CMC, int toughness, int power) {
+        super(tipo, nombre);
+        this.texto = texto;
         this.manaCost = manaCost;
         this.CMC = CMC;
         this.toughness = toughness;
@@ -17,6 +17,26 @@ public class NonLand extends Carta {
     @Override
     public boolean buscarCarta(String nombre) {
         return false;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public String getManaCost() {
+        return manaCost;
+    }
+
+    public int getCMC() {
+        return CMC;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public int getToughness() {
+        return toughness;
     }
 
     @Override

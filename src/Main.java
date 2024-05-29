@@ -8,9 +8,10 @@ public class Main {
 
         IsistemaDeckList instalador = new Instalador().instalarSistema();
         instalador.inicializar();
-        StdOut.println("======= Bienvenido al Gestor de mazos =======\n");
+
         boolean menuActivo=true;
         while (menuActivo){
+            StdOut.println("======= Bienvenido al Gestor de mazos =======\n");
             StdOut.println("\n1.iniciar sesion\n2.Registrarse\n3.salir");
             String respuesta=StdIn.readString();
         switch (respuesta){

@@ -3,7 +3,7 @@ package Model;
 public class Land extends Carta {
     private final String Colores;
 
-    public Land(String tipo, String nombre, String colores) {
+    public Land(String nombre, String tipo, String colores) {
         super(tipo, nombre);
         this.Colores = colores;
     }

@@ -2,22 +2,27 @@ package Model;
 
 public class Mazo {
 private Carta[] mainDeck, sideDeck;
-private int cantidadMaxima, cantidadActual;
+private int cantidadMaxima, cantidadActualMainDeck,cantidadActualsideDeck;
     public Mazo(int cantidadMaxima) {
-        this.cantidadActual=0;
+        this.cantidadActualsideDeck=0;
+        this.cantidadActualMainDeck =0;
         this.cantidadMaxima=cantidadMaxima;
         this.mainDeck = new Carta[cantidadMaxima];
         this.sideDeck = new Carta[15];
     }
-    public boolean agregarCarta (Carta carta){
-        mainDeck[cantidadActual]=carta;
-        return false;
+    public void agregarCartaMainDeck(Carta carta){
+        mainDeck[cantidadActualMainDeck]=carta;
+        cantidadActualMainDeck++;
+    }
+    public void agregarCartaSideDeck (Carta carta){
+        sideDeck[cantidadActualsideDeck]=carta;
+        cantidadActualsideDeck++;
     }
 
     public boolean modificarDeck(String tipo){
         return false;
     }
-    public boolean agregarCarta(String nombre,int cantidad){
+    public boolean agregarCartaMainDeck(String nombre, int cantidad){
 
         return false;
     }
@@ -36,12 +41,16 @@ private int cantidadMaxima, cantidadActual;
         this.mainDeck = mainDeck;
     }
 
-    public int getCantidadActual() {
-        return cantidadActual;
+    public int getCantidadActualsideDeck() {
+        return cantidadActualsideDeck;
     }
 
-    public void setCantidadActual(int cantidadActual) {
-        this.cantidadActual = cantidadActual;
+    public int getCantidadActualMainDeck() {
+        return cantidadActualMainDeck;
+    }
+
+    public void setCantidadActualMainDeck(int cantidadActualMainDeck) {
+        this.cantidadActualMainDeck = cantidadActualMainDeck;
     }
 
     public int getCantidadMaxima() {
@@ -58,5 +67,9 @@ private int cantidadMaxima, cantidadActual;
 
     public void setSideDeck(Carta[] sideDeck) {
         this.sideDeck = sideDeck;
+    }
+
+    public void LeerMazo(String[][] mainDeck, String[][] sideDeck) {
+
     }
 }

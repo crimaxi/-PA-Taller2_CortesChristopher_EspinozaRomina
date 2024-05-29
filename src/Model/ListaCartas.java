@@ -13,4 +13,11 @@ public class ListaCartas {
         ListaCartas[cantidadActual]=carta;
         this.cantidadActual++;
     }
+    public Carta buscarCartas(String nombreCarta){
+        for (int i=0; i<this.cantidadActual ;i++){
+            if(nombreCarta.equals(ListaCartas[i].getNombre())){;
+            return ListaCartas[i];}
+        }
+        return null;
+    }
 }

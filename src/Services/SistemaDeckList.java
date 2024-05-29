@@ -20,10 +20,99 @@ public class SistemaDeckList implements IsistemaDeckList {
 
     }
     private void construirMazo(Mazo mazo) {
+
+        boolean menuActivo=true;
+        while (menuActivo){
+            StdOut.println("menu de construccion de mazo");
+           StdOut.println("1. Añadir carta\n2. Eliminar Carta\n3. Buscar carta\n4. modificar sideboard\n5. volver");
+           String respuesta=StdIn.readString();
+           switch (respuesta){
+               case "1":
+
+                   break;
+               case "2":
+
+                   break;
+               case "3":
+                   buscarCarta();
+                   break;
+               case "4":
+                   modificarSideboard(mazo);
+                   break;
+               case "5":
+                   return;
+
+               default:
+                   StdOut.println("el valor ingresado es invalido");
+
+           }
+        }
     }
 
-    private void verMisMazos() {
+    private void modificarSideboard(Mazo mazo) {
+        StdOut.println("menu de construccion de mazo");
+        boolean menuActivo=true;
+        while (menuActivo){
+            StdOut.println("1. Añadir carta\n2. Eliminar Carta\n3. Buscar carta\n4. volver");
+            String respuesta=StdIn.readString();
+            switch (respuesta){
+                case "1":
 
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    buscarCarta();
+                    break;
+                case "4":
+                    return;
+                default:
+                    StdOut.println("el valor ingresado es invalido");
+
+            }
+        }
+    }
+
+    private void buscarCarta() {
+        StdOut.println("ingrese nombre de la carta que desea ");
+            String respuesta=StdIn.readString();
+            Carta cartaleida =listaNoTierras.buscarCartas(respuesta);
+            if(cartaleida!=null) {
+                NonLand carta = (NonLand) cartaleida;
+                StdOut.println("nombre:" + carta.getNombre() + "\ntipo:" + carta.getTipo() + "\ntexto:" + carta.getTexto() + "\npower:" + carta.getPower() + "\ntoughness:" + carta.getToughness() + "\nmanaCost" + carta.getManaCost() + "\nCMC: " + carta.getCMC());
+                return;
+            }
+            cartaleida=listaTierras.buscarCartas(respuesta);
+            if(cartaleida!=null) {
+                Land carta = (Land) cartaleida;
+                StdOut.println("nombre:" + carta.getNombre() + "\ntipo:" + carta.getTipo() + "\ntexto:" + carta.getColores());
+                return;
+            }
+            if (cartaleida==null){
+                StdOut.println("la carta no existe en la base de datos");
+            }
+        }
+
+
+    private void verMisMazos() {
+        StdOut.println("elije que mazo quieres ver");
+        Mazo mazo=buscarMazo();
+        if(mazo!=null) {
+            MostrarMazo(mazo);
+        }
+    }
+
+    private void MostrarMazo(Mazo mazo) {
+        Carta[] lecturaDeMazo = mazo.getMainDeck();
+        StdOut.println("main deck: ");
+        for (int i=0;i< mazo.getCantidadActualMainDeck();i++){
+            StdOut.println(lecturaDeMazo[i].getNombre()+" cantidad: "+lecturaDeMazo[i].getCantidad());
+        }
+        StdOut.println("side deck: ");
+        Carta[] lecturaDeMazo2 = mazo.getSideDeck();
+        for (int i=0;i< mazo.getCantidadActualsideDeck();i++){
+            StdOut.println(lecturaDeMazo2[i].getNombre()+" cantidad: "+lecturaDeMazo2[i].getCantidad());
+        }
     }
 
     private void BuscarCartas() {
@@ -35,7 +124,7 @@ public class SistemaDeckList implements IsistemaDeckList {
     }
 
 
-    private boolean LecturaDeBaseDeDatos() {
+    private void LecturaDeBaseDeDatos() {
 
         Carta listaTierrasEntrada[] = new Carta[500];
         Carta listaNoTierrasEntrada[] = new Carta[1000];
@@ -67,11 +156,11 @@ public class SistemaDeckList implements IsistemaDeckList {
 
             String[] linea = archivoTierras.readLine().split(",");
             String nombre = linea[0];
-            if (!nombre.equals("Card Name")) {
+            if (!nombre.equals("Card name")) {
                 String type = linea[1];
                 String color = linea[2];
-                Carta carta = new Land(nombre, type, color);
-                listaNoTierrasEntrada[contTierras] = carta;
+                Carta carta = new Land(nombre,type,color);
+                listaTierrasEntrada[contTierras] = carta;
                 contTierras++;
             }
 
@@ -87,9 +176,9 @@ public class SistemaDeckList implements IsistemaDeckList {
         }
 
 
-        return true;
     }
-    private boolean LecturaDeMazos(String nombreDeUsuario) {
+
+    private void LecturaDeMazos(String nombreDeUsuario) {
         int cont = 1;
         this.NOMBRE_ARCHIVO_TEXTO_MAZO = "mazo" + cont + nombreDeUsuario + ".txt";
         File Archivo = new File(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
@@ -107,27 +196,48 @@ public class SistemaDeckList implements IsistemaDeckList {
 
                 if (linea[0].equals("SIDEBOARD")) {
                     sidedeck = true;
-                    cont2 = 0;
-                } else {
+                }
+
+                if (sidedeck&&!linea[0].equals("SIDEBOARD")) {
+                    sideDeck[0][cont3] = linea[0];
+                    sideDeck[1][cont3] = linea[1];
+                    cont3++;
+                }else if (!sidedeck&&!linea[0].equals("SIDEBOARD")){
                     MainDeck[0][cont2] = linea[0];
                     MainDeck[1][cont2] = linea[1];
                     cont2++;
-
                 }
-                if (sidedeck) {
-                    sideDeck[0][cont3] = linea[0];
-                    sideDeck[0][cont3] = linea[1];
-                    cont3++;
-                }
-               Mazo mazo = new Mazo(cont2);
-
             }
+            crearMazoDeEntrada(cont2,cont3, MainDeck, sideDeck);
+            cont2=0;
+            cont3=0;
+            sidedeck = false;
             cont++;
             this.NOMBRE_ARCHIVO_TEXTO_MAZO = "mazo" + cont + nombreDeUsuario + ".txt";
             Archivo = new File(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
         }
-        return true;
 
+    }
+
+    private void crearMazoDeEntrada(int cont2,int cont3,  String[][] MainDeck, String[][] sideDeck) {
+        Mazo mazo = new Mazo(cont2);
+        for (int i = 0; i< cont2; i++){
+            Carta cartaleida =(listaNoTierras.buscarCartas(MainDeck[1][i]));
+            if(cartaleida==null){
+                cartaleida=listaTierras.buscarCartas(MainDeck[1][i]);
+            }
+            cartaleida.setCantidad(Integer.parseInt(MainDeck[0][i]));
+            mazo.agregarCartaMainDeck(cartaleida);
+        }
+        for (int i = 0; i< cont3; i++){
+            Carta cartaleida =(listaNoTierras.buscarCartas(sideDeck[1][i]));
+            if(cartaleida==null){
+                cartaleida=listaTierras.buscarCartas(sideDeck[1][i]);
+            }
+            cartaleida.setCantidad(Integer.parseInt(sideDeck[0][i]));
+            mazo.agregarCartaSideDeck(cartaleida);
+        }
+        Mazos.agregarMazos(mazo);
     }
 
 
@@ -166,18 +276,22 @@ public class SistemaDeckList implements IsistemaDeckList {
 
     @Override
     public void sistemaCreacion() {
-        StdOut.println("=============Menu Principal=============\n 1. construir mazo\n 2. ver mis mazos \n 3. buscar Carta \n 4. Cerrar sesion");
-        String respuesta = StdIn.readString();
+
+
         boolean menuActivo = true;
-        while (menuActivo)
+        while (menuActivo) {
+            StdOut.println("=============Menu Principal=============");
+            StdOut.println("\n 1. construir mazo\n 2. ver mis mazos \n 3. buscar Carta \n 4. Cerrar sesion");
+            String respuesta = StdIn.readString();
             switch (respuesta) {
                 case "1":
                     menuCreacionMazo();
                     break;
                 case "2":
-
+                    verMisMazos();
                     break;
                 case "3":
+                    buscarCarta();
                     break;
                 case "4":
                     menuActivo = false;
@@ -186,13 +300,15 @@ public class SistemaDeckList implements IsistemaDeckList {
                     StdOut.println("el valor ingresado no es correcto, intentar nuevamente");
                     break;
             }
+        }
     }
 
     private void menuCreacionMazo() {
         boolean menuActivo = true;
-        StdOut.println("=============Menu de Construccion=============\n 1. construir mazo nuevo\n 2. Modificar Mazo \n 3. volver");
-        String respuesta = StdIn.readString();
         while (menuActivo) {
+            StdOut.println("=============Menu de Construccion=============");
+            StdOut.println("\n 1. construir mazo nuevo\n 2. Modificar Mazo \n 3. volver");
+            String respuesta = StdIn.readString();
             switch (respuesta) {
                 case "1":
                     construirMazo();
@@ -202,11 +318,40 @@ public class SistemaDeckList implements IsistemaDeckList {
                     menuActivo = false;
                     break;
                 default:
+                    StdOut.println("el valor ingresado es incorrecto");
+                    break;
             }
         }
     }
 
     private void ModificarMazo() {
+
+        StdOut.println("Elige que mazo modificar: ");
+        Mazo mazo = buscarMazo();
+        if(mazo!=null){
+        construirMazo(mazo);
+        }
+    }
+
+    private Mazo buscarMazo() {
+        int contador = 0;
+        if (Mazos.getCantidadActual() == 0) {
+            StdOut.println("No existen mazos asociados a esta cuenta");
+            return null;
+        }
+        for (int i = 0; i < Mazos.getCantidadActual(); i++) {
+            contador = i + 1;
+            StdOut.println(contador + "." + " mazo " + contador);
+        }
+
+        int respuesta = StdIn.readInt();
+
+        if (respuesta > contador) {
+            StdOut.println("el mazo ingresado no existe");
+            return null;
+        }
+        return Mazos.getMazo(contador - 1);
+
     }
 
     @Override

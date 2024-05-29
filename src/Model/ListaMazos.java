@@ -9,14 +9,24 @@ private int cantidadActual, cantidadMaxima;
         this.cantidadActual = 0;
         this.Mazos=new Mazo[cantidadMaxima];
     }
-    public boolean agregarMazos(Mazo mazo){
 
-        return false;
+    public int getCantidadActual() {
+        return cantidadActual;
+    }
+
+    public void agregarMazos(Mazo mazo){
+        Mazos[cantidadActual]=mazo;
+        cantidadActual++;
     }
     public boolean eliminarMazos(int posicionDelMazo){
         return false;
     }
 
 
-
+    public Mazo getMazo(int posicion){
+        if(posicion<this.cantidadActual){
+            return this.Mazos[posicion];
+        }
+      return null;
+    }
 }

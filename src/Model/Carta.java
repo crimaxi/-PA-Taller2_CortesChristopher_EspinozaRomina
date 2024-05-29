@@ -1,23 +1,27 @@
 package Model;
 
 public abstract class Carta {
-private String nombre, texto;
+private String nombre, tipo;
 private int cantidad;
 
-    public Carta(String texto, String nombre) {
-        this.texto = texto;
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public Carta(String tipo, String nombre) {
+        this.tipo = tipo;
         this.cantidad=1;
         this.nombre = nombre;
     }
     public abstract boolean buscarCarta  (String nombre);
     public abstract boolean agregarCarta (String nombre, String tipo, String texto);
 
-    public String getTexto() {
-        return texto;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setTexto(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getNombre() {
