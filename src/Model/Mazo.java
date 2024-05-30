@@ -11,8 +11,32 @@ private int cantidadMaxima, cantidadActualMainDeck,cantidadActualsideDeck;
         this.sideDeck = new Carta[15];
     }
     public void agregarCartaMainDeck(Carta carta){
-        mainDeck[cantidadActualMainDeck]=carta;
-        cantidadActualMainDeck++;
+        if(carta!=null) {
+            mainDeck[cantidadActualMainDeck] = carta;
+            cantidadActualMainDeck++;
+        }
+    }
+    public void agregarCartaMainDeck(Carta carta,int cantidad){
+        for(int i=0;i<cantidadActualMainDeck;i++){
+            if(carta==mainDeck[i]&&carta.getCantidad()+cantidad<5){
+                mainDeck[i].setCantidad(cantidad+carta.getCantidad());
+            }else{
+                mainDeck[cantidadActualMainDeck]=carta;
+                cantidadActualMainDeck++;
+            }
+
+        }
+    }
+    public void agregarCartasideDeck(Carta carta,int cantidad){
+        for(int i=0;i<cantidadActualsideDeck;i++){
+            if(carta==sideDeck[i]&&carta.getCantidad()+cantidad<5){
+                sideDeck[i].setCantidad(cantidad+carta.getCantidad());
+            }else{
+                sideDeck[cantidadActualsideDeck]=carta;
+                cantidadActualsideDeck++;
+            }
+
+        }
     }
     public void agregarCartaSideDeck (Carta carta){
         sideDeck[cantidadActualsideDeck]=carta;

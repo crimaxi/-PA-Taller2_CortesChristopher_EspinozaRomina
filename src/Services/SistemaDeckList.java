@@ -1,11 +1,9 @@
 package Services;
 
 import Model.*;
-import ucn.In;
-import ucn.StdIn;
-import ucn.StdOut;
-
+import ucn.*;
 import java.io.File;
+import java.io.IOException;
 
 public class SistemaDeckList implements IsistemaDeckList {
     private ListaUsuario usuarios = new ListaUsuario(100);
@@ -28,7 +26,7 @@ public class SistemaDeckList implements IsistemaDeckList {
            String respuesta=StdIn.readString();
            switch (respuesta){
                case "1":
-
+                    agregarCarta(mazo);
                    break;
                case "2":
 
@@ -47,6 +45,28 @@ public class SistemaDeckList implements IsistemaDeckList {
 
            }
         }
+    }
+
+    private void agregarCarta(Mazo mazo) {
+        StdOut.println("ingrese el nombre de la carta que quiere agregar");
+        String nombre=StdIn.readString();
+        Carta cartaleida =listaNoTierras.buscarCartas(nombre);
+        int cantidad;
+        StdOut.println("ingrese la cantidad de cartas que quiere agregar");
+        cantidad=StdIn.readInt();
+        if(cartaleida!=null) {
+            mazo.agregarCartaMainDeck(cartaleida,cantidad);
+            return;
+        }
+        cartaleida=listaTierras.buscarCartas(nombre);
+        if(cartaleida!=null) {
+            mazo.agregarCartaMainDeck(cartaleida,cantidad);
+            return;
+        }
+        if (cartaleida==null){
+            StdOut.println("la carta no existe en la base de datos");
+        }
+
     }
 
     private void modificarSideboard(Mazo mazo) {
@@ -93,7 +113,6 @@ public class SistemaDeckList implements IsistemaDeckList {
             }
         }
 
-
     private void verMisMazos() {
         StdOut.println("elije que mazo quieres ver");
         Mazo mazo=buscarMazo();
@@ -119,10 +138,41 @@ public class SistemaDeckList implements IsistemaDeckList {
 
     }
 
-    private void CerrarSesion() {
+    private void CerrarSesion() throws IOException {
+        int cont=1;
+        String usuario= usuarios.getUsuarioActivo().getNombre();
+        for(int i = 0; i < Mazos.getCantidadActual(); i++) {
+            ArchivoSalida out = new ArchivoSalida("mazo" + cont + usuario + ".txt");
+            Carta[] CartaMain =Mazos.getMazo(i).getMainDeck();
+            Carta[] cartaSide =Mazos.getMazo(i).getSideDeck();
+            for (int j = 0; j < CartaMain.length; j++) {
+                if(CartaMain[j]!=null) {
+                    Registro linea = new Registro(2);
+                    linea.agregarCampo(String.valueOf(CartaMain[j].getCantidad()));
+                    linea.agregarCampo(CartaMain[j].getNombre());
+                    out.writeRegistro(linea);
+                }
+            }
+            Registro lineaSIde= new Registro(1);
+            lineaSIde.agregarCampo("SIDEBOARD");
+            out.writeRegistro(lineaSIde);
+
+            for  (int j = 0; j < cartaSide.length; j++){
+                if(cartaSide[j]!=null) {
+                    Registro linea = new Registro(2);
+                    linea.agregarCampo(String.valueOf(cartaSide[j].getCantidad()));
+                    linea.agregarCampo(cartaSide[j].getNombre());
+                    out.writeRegistro(linea );
+                }else{
+                    out.close();
+                    return;
+                }
+                }
+            cont++;
+            out.close();
+        }
 
     }
-
 
     private void LecturaDeBaseDeDatos() {
 
@@ -192,7 +242,7 @@ public class SistemaDeckList implements IsistemaDeckList {
             In archivoDeck = new In(this.NOMBRE_ARCHIVO_TEXTO_MAZO);
             while (!archivoDeck.isEmpty()) {
 
-                String[] linea = archivoDeck.readLine().split(";");
+                String[] linea = archivoDeck.readLine().split(",");
 
                 if (linea[0].equals("SIDEBOARD")) {
                     sidedeck = true;
@@ -220,7 +270,7 @@ public class SistemaDeckList implements IsistemaDeckList {
     }
 
     private void crearMazoDeEntrada(int cont2,int cont3,  String[][] MainDeck, String[][] sideDeck) {
-        Mazo mazo = new Mazo(cont2);
+        Mazo mazo = new Mazo(200);
         for (int i = 0; i< cont2; i++){
             Carta cartaleida =(listaNoTierras.buscarCartas(MainDeck[1][i]));
             if(cartaleida==null){
@@ -239,7 +289,6 @@ public class SistemaDeckList implements IsistemaDeckList {
         }
         Mazos.agregarMazos(mazo);
     }
-
 
     @Override
     public boolean inicializar() {
@@ -275,9 +324,7 @@ public class SistemaDeckList implements IsistemaDeckList {
     }
 
     @Override
-    public void sistemaCreacion() {
-
-
+    public void sistemaCreacion() throws IOException {
         boolean menuActivo = true;
         while (menuActivo) {
             StdOut.println("=============Menu Principal=============");
@@ -294,8 +341,8 @@ public class SistemaDeckList implements IsistemaDeckList {
                     buscarCarta();
                     break;
                 case "4":
-                    menuActivo = false;
-                    break;
+                    CerrarSesion();
+                    return;
                 default:
                     StdOut.println("el valor ingresado no es correcto, intentar nuevamente");
                     break;
